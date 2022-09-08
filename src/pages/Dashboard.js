@@ -37,7 +37,7 @@ const Dashboard = ({location, setLocation}) => {
 
                     <div className="col-sm-3">
                         <select className="form-select form-select-lg" >
-                            <option selected>Ocena...</option>
+                            <option defaultValue={'Ocena'}>Ocena...</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -48,7 +48,7 @@ const Dashboard = ({location, setLocation}) => {
 
                     <div className="col-sm-3">
                         <select className="form-select form-select-lg" >
-                            <option selected>Slika...</option>
+                            <option defaultValue={'Slika'}>Slika...</option>
                             <option value="1">engleska</option>
                             <option value="2">italija</option>
                             <option value="1">dominikana</option>
