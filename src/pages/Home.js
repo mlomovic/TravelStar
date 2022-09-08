@@ -1,6 +1,15 @@
-import React from 'react';
+import { React, useEffect} from 'react';
+import { useLocation } from 'react-router-dom';
 
-const Home = () => {
+const Home = ({location, setLocation}) => {
+
+    let curLocation = useLocation();
+    // console.log(curLocation);
+    useEffect(()=>{
+        setLocation(curLocation.pathname);
+    }, []);
+
+
     return (
         <section className="hero text-white d-flex flex-column justify-content-center align-items-center">
             <h1 className="fw-bold display-5">Gde zelite da putujete?</h1>
