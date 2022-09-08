@@ -31,7 +31,7 @@ const Detalji = ({location, setLocation, putovanja}) => {
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item">Destinacija: {putovanja[params.singleId].destinacija}</li>
                                     <li className="list-group-item">Ocena: {putovanja[params.singleId].ocena}</li>
-                                    <li className="list-group-item">Datum putovanja: {putovanja[params.singleId].datumPutovanja}</li>
+                                    <li className="list-group-item">Datum putovanja: {putovanja[params.singleId].datumPolaska}</li>
                                     <li className="list-group-item">Cena: {putovanja[params.singleId].cena}</li>
                                     <li className="list-group-item"><button className="btn btn-danger w-100">Rezervisi</button></li>
                                 </ul>

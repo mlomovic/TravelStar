@@ -12,6 +12,8 @@ import NotFound from './pages/NotFound';
 const App = () => {
 
   const [location, setLocation] = useState('/');
+  const [searchDest, setSearchDest] = useState('');
+  const [sortiranje, setSortiranje] = useState('');
   const [putovanja, setPutovanja] = useState([
     {
       destinacija: 'Dominikana',
@@ -40,33 +42,33 @@ const App = () => {
       cena: 1800,
       ocena: 5
     },
-    {
-      destinacija: 'Italija',
-      naslov: 'Predivno mesto za odmor sa umirujucim vibracijama...',
-      opis: 'dominikana je ostrvo u Pacifiku poznato po svojim plazama mestima za odmor i ccigarama..',
-      img: 'italija.jpg',
-      datumPolaska: '2023-03-03',
-      cena: 450,
-      ocena: 4
-    },
-    {
-      destinacija: 'Maldivi',
-      naslov: 'Predivno mesto za odmor sa umirujucim vibracijama...',
-      opis: 'dominikana je ostrvo u Pacifiku poznato po svojim plazama mestima za odmor i ccigarama..',
-      img: 'maldivi.jpg',
-      datumPolaska: '2023-07-05',
-      cena: 2000,
-      ocena: 5
-    },
-    {
-      destinacija: 'Dubai',
-      naslov: 'Predivno mesto za odmor sa umirujucim vibracijama...',
-      opis: 'dominikana je ostrvo u Pacifiku poznato po svojim plazama mestima za odmor i ccigarama..',
-      img: 'uae.jpg',
-      datumPolaska: '2023-11-16',
-      cena: 1900,
-      ocena: 3
-    }
+    // {
+    //   destinacija: 'Italija',
+    //   naslov: 'Predivno mesto za odmor sa umirujucim vibracijama...',
+    //   opis: 'dominikana je ostrvo u Pacifiku poznato po svojim plazama mestima za odmor i ccigarama..',
+    //   img: 'italija.jpg',
+    //   datumPolaska: '2023-03-03',
+    //   cena: 450,
+    //   ocena: 4
+    // },
+    // {
+    //   destinacija: 'Maldivi',
+    //   naslov: 'Predivno mesto za odmor sa umirujucim vibracijama...',
+    //   opis: 'dominikana je ostrvo u Pacifiku poznato po svojim plazama mestima za odmor i ccigarama..',
+    //   img: 'maldivi.jpg',
+    //   datumPolaska: '2023-07-05',
+    //   cena: 2000,
+    //   ocena: 5
+    // },
+    // {
+    //   destinacija: 'Dubai',
+    //   naslov: 'Predivno mesto za odmor sa umirujucim vibracijama...',
+    //   opis: 'dominikana je ostrvo u Pacifiku poznato po svojim plazama mestima za odmor i ccigarama..',
+    //   img: 'uae.jpg',
+    //   datumPolaska: '2023-11-16',
+    //   cena: 1900,
+    //   ocena: 3
+    // }
   ]);
 
   return (
@@ -78,8 +80,8 @@ const App = () => {
         <Navbar location={location} />
 
         <Routes>
-          <Route path='/' element={<Home setLocation={setLocation} />} />
-          <Route path='/putovanja' element={<Putovanja setLocation={setLocation} putovanja={putovanja}/>} />
+          <Route path='/' element={<Home setLocation={setLocation} searchDest={searchDest} setSearchDest={setSearchDest} sortiranje={sortiranje} setSortiranje={setSortiranje}/>} />
+          <Route path='/putovanja' element={<Putovanja setLocation={setLocation} putovanja={putovanja} searchDest={searchDest} setSearchDest={setSearchDest} sortiranje={sortiranje} setSortiranje={setSortiranje}/>} />
           <Route path='/detalji' element={<Detalji setLocation={setLocation} putovanja={putovanja} setPutovanja={setPutovanja}/>}>
             <Route path=":singleId" element={<Detalji />} />
           </Route>

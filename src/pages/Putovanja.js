@@ -1,23 +1,64 @@
-import { React, useEffect } from 'react';
+import { React, useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import filter from '../utils/filter';
 
-const Putovanja = ({ setLocation, putovanja}) => {
+const Putovanja = ({ setLocation, putovanja, searchDest, setSearchDest, sortiranje, setSortiranje }) => {
+
+    const [prikazPutovanja, setPrikazPutovanja] = useState([]);
+    
 
     let curLocation = useLocation();
     // console.log(curLocation);
     useEffect(() => {
         setLocation(curLocation.pathname);
+
+        // if(searchDest === ''){
+        //     setPrikazPutovanja([...putovanja]);
+        // } else {
+
+        //     const tempPut = putovanja.filter((putovanje, idx) => {
+        //         // if(putovanje.destinacija === searchDest) return putovanje
+        //         if (putovanje.destinacija.toUpperCase().startsWith(searchDest.toUpperCase())) return putovanje
+        //     });
+
+        //     setPrikazPutovanja([...tempPut]);
+        // }
+        let tmp = filter(searchDest, putovanja, sortiranje);
+        setPrikazPutovanja([...tmp]);
+
     }, []);
+
+
+    const pretraga = (event) => {
+        event.preventDefault();
+
+        // if (searchDest === '') {
+        //     setPrikazPutovanja([...putovanja]);
+        // } else {
+
+        //     const tempPut = putovanja.filter((putovanje, idx) => {
+        //         // if(putovanje.destinacija === searchDest) return putovanje
+        //         if (putovanje.destinacija.toUpperCase().startsWith(searchDest.toUpperCase())) return putovanje
+        //     });
+
+        //     setPrikazPutovanja([...tempPut]);
+        // }
+
+        let tmp = filter(searchDest, putovanja, sortiranje);
+        setPrikazPutovanja([...tmp]);
+
+    }
+
 
     return (
         <>
             <section className="bg-light py-5 text-dark d-flex flex-column justify-content-center align-items-center">
                 <h1 className="fw-bold display-5">Gde zelite da putujete?</h1>
                 <p>Pretrazite nasu veliku ponudu premium putovanja</p>
-                <form className="row gx-3 gy-2 align-items-center container">
+                <form onSubmit={(event) => pretraga(event)} className="row gx-3 gy-2 align-items-center container">
 
                     <div className="col-sm-3">
-                        <input type="text" className="form-control form-control-lg" placeholder="Destinacija" />
+                        <input value={searchDest} onChange={(event) => setSearchDest(event.target.value)} type="text" className="form-control form-control-lg" placeholder="Destinacija" />
                     </div>
 
                     <div className="col-sm-3">
@@ -30,7 +71,7 @@ const Putovanja = ({ setLocation, putovanja}) => {
                     </div>
 
                     <div className="col-sm-3">
-                        <select className="form-select form-select-lg" >
+                        <select value={sortiranje} onChange={(event) => setSortiranje(event.target.value)} className="form-select form-select-lg" >
                             <option defaultValue={'Sortiraj'}>Sortiraj...</option>
                             <option value="1">Opadajuce</option>
                             <option value="2">Rastuce</option>
@@ -46,7 +87,7 @@ const Putovanja = ({ setLocation, putovanja}) => {
             <section className="container pregled-putovanja py-5">
                 <div className="row row-cols-1 row-cols-md-3 g-4">
 
-                    {putovanja.map((putovanje, idx) => {
+                    {prikazPutovanja.map((putovanje, idx) => {
                         return (
                             <div className="col" key={idx}>
                                 <div className="card h-100">

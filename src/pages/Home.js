@@ -1,23 +1,34 @@
 import { React, useEffect} from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const Home = ({setLocation}) => {
+const Home = ({setLocation, searchDest, setSearchDest, sortiranje, setSortiranje}) => {
 
     let curLocation = useLocation();
+    let navigate = useNavigate();
     // console.log(curLocation);
     useEffect(()=>{
         setLocation(curLocation.pathname);
     }, []);
 
 
+    const pretraga = (event) => {
+        event.preventDefault();
+
+        setSearchDest(event.target.odrediste.value);
+
+        navigate('/putovanja', {replace: true})    
+
+    }
+
+
     return (
         <section className="hero text-white d-flex flex-column justify-content-center align-items-center">
             <h1 className="fw-bold display-5">Gde zelite da putujete?</h1>
             <p>Pretrazite nasu veliku ponudu premium putovanja</p>
-            <form className="row gx-3 gy-2 align-items-center container">
+            <form onSubmit={(event) => pretraga(event)} className="row gx-3 gy-2 align-items-center container">
 
                 <div className="col-sm-3">
-                    <input type="text" className="form-control form-control-lg" placeholder="Destinacija"/>
+                    <input name='odrediste' type="text" className="form-control form-control-lg" placeholder="Destinacija"/>
                 </div>
 
                 <div className="col-sm-3">
@@ -30,7 +41,7 @@ const Home = ({setLocation}) => {
                 </div>
 
                 <div className="col-sm-3">
-                    <select className="form-select form-select-lg" >
+                    <select value={sortiranje} onChange={(event) => setSortiranje(event.target.value)} className="form-select form-select-lg" >
                         <option defaultValue={'Sortiraj'}>Sortiraj...</option>
                         <option value="1">Opadajuce</option>
                         <option value="2">Rastuce</option>
